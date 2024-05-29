@@ -94,7 +94,7 @@ export const ganttDateRange = (
     case ViewMode.QuarterYear:
       newStartDate = addToDate(newStartDate, -3, "month");
       newStartDate = startOfDate(newStartDate, "month");
-      newEndDate = addToDate(newEndDate, 3, "month");
+      newEndDate = addToDate(newEndDate, 12, "month");
       newEndDate = startOfDate(newEndDate, "month");
       break;
     case ViewMode.Month:
