@@ -59,7 +59,6 @@ export const Calendar: React.FC<CalendarProps> = ({
           xText = (6 + i + date.getFullYear() + 1) * columnWidth;
         } else {
           xText = (6 + i - date.getFullYear()) * columnWidth;
-          xText = (columnWidth * i) + 20;
         }
         topValues.push(
           <TopPartOfCalendar
@@ -105,6 +104,7 @@ export const Calendar: React.FC<CalendarProps> = ({
           xText = (6 + i + date.getMonth() + 1) * columnWidth;
         } else {
           xText = (6 + i - date.getMonth()) * columnWidth;
+          xText = (columnWidth * i) + 20;
         }
         topValues.push(
           <TopPartOfCalendar
@@ -149,7 +149,6 @@ export const Calendar: React.FC<CalendarProps> = ({
           xText = (6 + i + date.getMonth() + 1) * columnWidth;
         } else {
           xText = (6 + i - date.getMonth()) * columnWidth;
-          xText = (columnWidth * i) + 20;
         }
         topValues.push(
           <TopPartOfCalendar
