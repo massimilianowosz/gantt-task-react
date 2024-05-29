@@ -149,6 +149,7 @@ export const Calendar: React.FC<CalendarProps> = ({
           xText = (6 + i + date.getMonth() + 1) * columnWidth;
         } else {
           xText = (6 + i - date.getMonth()) * columnWidth;
+          xText = (columnWidth * i) + 20;
         }
         topValues.push(
           <TopPartOfCalendar
