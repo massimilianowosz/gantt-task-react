@@ -20,6 +20,7 @@ export type CalendarProps = {
   columnWidth: number;
   fontFamily: string;
   fontSize: string;
+  setSelectedDate?: (date:string , x:number) => void
 };
 
 export const Calendar: React.FC<CalendarProps> = ({
@@ -31,6 +32,7 @@ export const Calendar: React.FC<CalendarProps> = ({
   columnWidth,
   fontFamily,
   fontSize,
+  setSelectedDate
 }) => {
   const getCalendarValuesForYear = () => {
     const topValues: ReactChild[] = [];
@@ -84,6 +86,8 @@ export const Calendar: React.FC<CalendarProps> = ({
       const date = dateSetup.dates[i];
       // const bottomValue = getLocaleMonth(date, locale);
       const quarter = "Q" + Math.floor((date.getMonth() + 3) / 3);
+
+      dateValues.push(quarter+"-"+date.getFullYear())
       bottomValues.push(
         <text
           key={date.getTime()}
@@ -104,17 +108,20 @@ export const Calendar: React.FC<CalendarProps> = ({
           xText = (6 + i + date.getMonth() + 1) * columnWidth;
         } else {
           xText = (6 + i - date.getMonth()) * columnWidth;
-          xText = (columnWidth * i) + 20;
+          xText = (columnWidth * i) + 30;
+
         }
+        let yText=topDefaultHeight * 0.9
+        yText=yText-5;
         topValues.push(
           <TopPartOfCalendar
             key={topValue}
             value={topValue}
             x1Line={columnWidth * i}
             y1Line={0}
-            y2Line={topDefaultHeight}
+            y2Line={topDefaultHeight*2}
             xText={Math.abs(xText)}
-            yText={topDefaultHeight * 0.9}
+            yText={yText}
           />
         );
       }
@@ -358,6 +365,7 @@ export const Calendar: React.FC<CalendarProps> = ({
 
   let topValues: ReactChild[] = [];
   let bottomValues: ReactChild[] = [];
+  let dateValues: string[] = [];
   switch (dateSetup.viewMode) {
     case ViewMode.Year:
       [topValues, bottomValues] = getCalendarValuesForYear();
@@ -389,6 +397,16 @@ export const Calendar: React.FC<CalendarProps> = ({
         width={columnWidth * dateSetup.dates.length}
         height={headerHeight}
         className={styles.calendarHeader}
+        onClick={(event)=> {
+          let element = event.target as HTMLElement;
+          const rect = element.getBoundingClientRect();          
+          const x = event.clientX - rect.left;
+          let column = Math.floor(x/columnWidth);
+          if(setSelectedDate) {
+            setSelectedDate(dateValues[column], x);
+          }
+          }
+        }
       />
       {bottomValues} {topValues}
     </g>

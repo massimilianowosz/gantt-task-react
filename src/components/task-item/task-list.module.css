@@ -12,7 +12,7 @@
 }
 
 .barLabelOutside {
-  fill: #555;
+  fill: #fff;
   text-anchor: start;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -20,4 +20,5 @@
   -ms-user-select: none;
   user-select: none;
   pointer-events: none;
+  dominant-baseline: central;
 }

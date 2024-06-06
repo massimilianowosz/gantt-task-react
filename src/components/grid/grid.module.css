@@ -1,15 +1,16 @@
 .gridRow {
-  fill: #fff;
+  fill: #212529;
 }
 
 .gridRow:nth-child(even) {
-  fill: #f5f5f5;
+  fill: #181b1e;
 }
 
 .gridRowLine {
-  stroke: #ebeff2;
+  stroke: #0c0d0f;
+  overscroll-behavior-x: none;
 }
 
 .gridTick {
-  stroke: #e6e4e4;
+  stroke: #0c0d0f;
 }

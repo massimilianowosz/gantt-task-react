@@ -65,11 +65,13 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
   onDelete,
   onSelect,
   onExpanderClick,
+  onSelectedDate
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const taskListRef = useRef<HTMLDivElement>(null);
-  const [dateSetup, setDateSetup] = useState<DateSetup>(() => {
-    const [startDate, endDate] = ganttDateRange(tasks, viewMode, preStepsCount);
+  const [selectedDateX, setSelectedDateX] = useState<number>();
+    const [dateSetup, setDateSetup] = useState<DateSetup>(() => {
+      const [startDate, endDate] = ganttDateRange(tasks, viewMode, preStepsCount);
     return { viewMode, dates: seedDates(startDate, endDate, viewMode) };
   });
   const [currentViewDate, setCurrentViewDate] = useState<Date | undefined>(
@@ -387,6 +389,13 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
       onExpanderClick({ ...task, hideChildren: !task.hideChildren });
     }
   };
+
+  const setSelectedDate = (date: string, x: number) => {
+    setSelectedDateX(x);
+    if(onSelectedDate) {
+      onSelectedDate(date)
+    }
+  }
   const gridProps: GridProps = {
     columnWidth,
     svgWidth,
@@ -395,6 +404,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     dates: dateSetup.dates,
     todayColor,
     rtl,
+    selectedDateX
   };
   const calendarProps: CalendarProps = {
     dateSetup,
@@ -405,6 +415,7 @@ export const Gantt: React.FunctionComponent<GanttProps> = ({
     fontFamily,
     fontSize,
     rtl,
+    setSelectedDate
   };
   const barProps: TaskGanttContentProps = {
     tasks: barTasks,

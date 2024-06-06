@@ -62,5 +62,8 @@
   },
   "files": [
     "dist"
-  ]
+  ],
+  "dependencies": {
+    "@babel/plugin-proposal-unicode-property-regex": "^7.18.6"
+  }
 }

@@ -11,6 +11,7 @@ export type GridBodyProps = {
   columnWidth: number;
   todayColor: string;
   rtl: boolean;
+  selectedDateX?: number
 };
 export const GridBody: React.FC<GridBodyProps> = ({
   tasks,
@@ -20,6 +21,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   columnWidth,
   todayColor,
   rtl,
+  selectedDateX,
 }) => {
   let y = 0;
   const gridRows: ReactChild[] = [];
@@ -61,6 +63,8 @@ export const GridBody: React.FC<GridBodyProps> = ({
   let tickX = 0;
   const ticks: ReactChild[] = [];
   let today: ReactChild = <rect />;
+  let selectedDate: ReactChild = <rect />;
+
   for (let i = 0; i < dates.length; i++) {
     const date = dates[i];
     ticks.push(
@@ -116,12 +120,26 @@ export const GridBody: React.FC<GridBodyProps> = ({
     }
     tickX += columnWidth;
   }
+
+  if(selectedDateX) {
+    selectedDate = (
+      <rect
+          x={0}
+          y={0}
+          width={Math.ceil(selectedDateX/columnWidth)*columnWidth}
+          height={y}
+          fill={'#22313A'}
+        />
+    );
+  }
+
   return (
     <g className="gridBody">
       <g className="rows">{gridRows}</g>
       <g className="rowLines">{rowLines}</g>
       <g className="ticks">{ticks}</g>
       <g className="today">{today}</g>
+      <g className="selectedDate">{selectedDate}</g>
     </g>
   );
 };
