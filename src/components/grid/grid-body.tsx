@@ -23,6 +23,7 @@ export const GridBody: React.FC<GridBodyProps> = ({
   rtl,
   selectedDateX,
 }) => {
+
   let y = 0;
   const gridRows: ReactChild[] = [];
   const rowLines: ReactChild[] = [

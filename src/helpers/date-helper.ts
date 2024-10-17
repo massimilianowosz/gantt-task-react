@@ -148,6 +148,9 @@ export const seedDates = (
 ) => {
   let currentDate: Date = new Date(startDate);
   const dates: Date[] = [currentDate];
+  const quarterStartMonth = Math.floor(currentDate.getMonth() / 3) * 3;
+  currentDate = new Date(currentDate.getFullYear(), quarterStartMonth, 1);
+
   while (currentDate < endDate) {
     switch (viewMode) {
       case ViewMode.Year:
